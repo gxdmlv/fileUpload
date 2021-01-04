@@ -28,9 +28,19 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public ReturnValue uploadFileTest(MultipartFile file) {
 
+        //上传文件路径
         String targetFilePath = "E:\\test\\uploadTest";
-        String fileName = UUID.randomUUID().toString().replace("-", "");
+        File dir = new File(targetFilePath);
+
+        //创建路径
+        if(!dir.isDirectory()){
+            dir.mkdir();
+
+        }
+
+        String fileName = file.getOriginalFilename();
         File targetFile = new File(targetFilePath + File.separator + fileName);
+
 
         FileOutputStream fileOutputStream = null;
         try {
